@@ -14,6 +14,7 @@
 """Tests
 """
 import os
+import unittest
 import zope.testing.cleanup
 from zope.testing import doctest
 from zope.configuration import config
@@ -52,11 +53,18 @@ def cat(filename):
     filename = os.path.join(here, 'testfixtures', filename)
     print open(filename).read()
 
-def test_suite():
-    return doctest.DocFileSuite('README.txt',
+def DocFileSuite(filename):
+    return doctest.DocFileSuite(filename,
                                 package='z3c.unconfigure',
                                 globs={'zcml': zcml,
                                        'cat': cat},
                                 tearDown=tearDown,
                                 optionflags=doctest.NORMALIZE_WHITESPACE,
                                 )
+    
+
+def test_suite():
+    suite = unittest.TestSuite()
+    suite.addTest(DocFileSuite('README.txt'))
+    return suite
+
