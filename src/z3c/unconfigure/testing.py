@@ -14,7 +14,7 @@
 """Test fixtures
 """
 from zope.interface import Interface
-from zope.schema import Text
+from zope.schema import Text, TextLine
 
 class IPrint(Interface):
     msg = Text(title=u'Message')
@@ -28,3 +28,15 @@ def print_(_context, msg):
 
 def do_print(msg):
     print msg
+
+
+class ILolCat(Interface):
+    who = TextLine(title=u'Who')
+    canhas = TextLine(title=u'Can has?')
+
+def lolcat(_context, who, canhas):
+    _context.action(
+        discriminator=('lolcat', who,),
+        callable=do_print,
+        args=(who + ' can has ' + canhas + '?',),
+        )

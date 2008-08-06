@@ -13,6 +13,7 @@
 ##############################################################################
 """Tests
 """
+import os
 import zope.testing.cleanup
 from zope.testing import doctest
 from zope.configuration import config
@@ -32,14 +33,30 @@ def zcml(source):
                                    namespace="*",
                                    schema=zopeconfigure.IZopeConfigure,
                                    handler=Unconfigure)
+
+    # Test directives
     config.defineSimpleDirective(
         context, "print", testing.IPrint, testing.print_, namespace="*")
+    config.defineSimpleDirective(
+        context, "lolcat", testing.ILolCat, testing.lolcat, namespace="*")
+
+    source = '''\
+<configure package="z3c.unconfigure.testfixtures">
+%s
+</configure>''' % source
 
     xmlconfig.string(source, context)
 
+def cat(filename):
+    here = os.path.dirname(__file__)
+    filename = os.path.join(here, 'testfixtures', filename)
+    print open(filename).read()
 
 def test_suite():
     return doctest.DocFileSuite('README.txt',
                                 package='z3c.unconfigure',
-                                globs={'zcml': zcml},
-                                tearDown=tearDown)
+                                globs={'zcml': zcml,
+                                       'cat': cat},
+                                tearDown=tearDown,
+                                optionflags=doctest.NORMALIZE_WHITESPACE,
+                                )

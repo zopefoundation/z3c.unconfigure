@@ -1,0 +1,8 @@
+<configure>
+  <print msg="Hello World!" />
+  <print msg="Important configuration here." />
+  <lolcat who="I" canhas="cheezburger" />
+  <print msg="Goodbye World!" />
+  <print msg="LOL!" />
+  <print msg="This is the last directive" />
+</configure>
