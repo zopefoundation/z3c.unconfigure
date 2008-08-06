@@ -1,0 +1,6 @@
+<configure>
+  <lolcat who="I" canhas="hamburger" />
+  <unconfigure>
+    <print msg="LOL!" />
+  </unconfigure>
+</configure>

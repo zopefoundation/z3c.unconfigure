@@ -66,5 +66,5 @@ def DocFileSuite(filename):
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(DocFileSuite('README.txt'))
+    suite.addTest(DocFileSuite('tests.txt'))
     return suite
-

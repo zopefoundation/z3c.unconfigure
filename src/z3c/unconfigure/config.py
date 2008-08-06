@@ -45,8 +45,13 @@ class Unconfigure(ZopeConfigure):
                 # configured in the first place.  Ignore.
                 continue
 
-            # An action by the same discriminator has been found,
-            # let's remove it from the configuration machine's actions
-            # list.
-            self.context.actions.remove(action)
+            # An action with the same discriminator has been found.
+            # We can't remove it because we mustn't change the length
+            # of the actions list (because includeOverrides relies on
+            # this not to change and we could easily be included via
+            # includeOverrides).
+            i = self.context.actions.index(action)
+            self.context.actions[i] = (None, None)
+
+            # Action has been replaced, no longer need to remember.
             del unique[discriminator]
