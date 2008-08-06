@@ -5,6 +5,8 @@ def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
 long_description = (
+    'Documentation\n' +
+    '=============\n\n' +
     read('src', 'z3c', 'unconfigure', 'README.txt')
     + '\n' +
     read('CHANGES.txt')

@@ -1,11 +1,17 @@
+Introduction
+------------
+
 This package allows you to disable specific bits of ZCML configuration
 that may occur in other packages.  For instance, let's consider a
-simple ZCML directive that prints strings:
+simple ZCML directive that prints strings and a silly one that prints
+lolcat messages:
 
   >>> zcml("""
   ... <print msg="Hello World!" />
+  ... <lolcat who="I" canhas="cheezburger" />
   ... """)
   Hello World!
+  I can has cheezburger?
 
 Now let's say this directive were used a bunch of times, but we wanted
 to prevent one or two of its occurrences.  To do that we simply repeat
@@ -21,7 +27,7 @@ out the ones we want to exclude:
   ...   <print msg="LOL!" />
   ...
   ...   <unconfigure>
-  ...     <lolcat who="I" canhas="cheezburger?" />
+  ...     <lolcat who="I" canhas="cheezburger" />
   ...     <print msg="LOL!" />
   ...   </unconfigure>
   ... </configure>
@@ -35,10 +41,13 @@ in the first place, nothing will happen:
   >>> zcml("""
   ... <configure>
   ...   <unconfigure>
-  ...     <print msg="I can has cheezburger?" />
+  ...     <lolcat who="I" canhas="cheezburger" />
   ...   </unconfigure>
   ... </configure>
   ... """)
+
+Where to place "unconfiguration"
+--------------------------------
 
 What's a good place to add the ``unconfigure`` directives, you may
 ask.  Certainly, the example from above is a not very realistic
