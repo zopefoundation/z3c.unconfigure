@@ -29,22 +29,25 @@ def is_subscriber(discriminator, callable=None, args=(), kw={},
 def real_subscriber_factory(discriminator, callable=None, args=(), kw={},
                             includepath=(), info='', order=0):
     """Returns the real subscriber factory (<subscriber /> sometimes
-    wraps them in some security-related adapter factory).
+    wraps them in some security-related adapter factory) and the
+    required set of of interfaces ('for' parameter).
 
     This function assumes that the action in question is a subscriber
     action.  In other words, is_subscriber(*args) is True.
     """
     factory = args[1]
+    for_ = args[2]
     if isinstance(factory, (adapter.LocatingTrustedAdapterFactory,
                             adapter.LocatingUntrustedAdapterFactory,
                             adapter.TrustedAdapterFactory)):
         factory = factory.factory
-    return factory
+    return factory, for_
 
 class Unconfigure(ZopeConfigure):
 
     def __init__(self, context, **kw):
         super(Unconfigure, self).__init__(context, **kw)
+
         # Make a new actions list here.  This will shadow
         # context.actions which would otherwise be "inherited" by our
         # superclass's __getattr__.  By shadowing the original list,
@@ -58,26 +61,25 @@ class Unconfigure(ZopeConfigure):
         unique = dict((action[0], action) for action in self.context.actions
                       if action[0] is not None)
 
-        # Find all subscriber actions and store them as factory -> action.
-        # They're a special case because their discriminators are None,
-        # so we can't pull the same trick as with other directives.
+        # Special-case subscriber actions: Find all subscriber actions
+        # and store them as (factory, for) -> action.  They're a
+        # special case because their discriminators are None, so we
+        # can't pull the same trick as with other directives.
         subscribers = dict((real_subscriber_factory(*action), action)
                            for action in self.context.actions
                            if is_subscriber(*action))
-        # XXX should make mapping (factory, required) -> action
 
-        # Now let's go through the actions within 'unconfigure'
-        # (hereafter called "unactions" :)) and use their
-        # discriminator to remove the real actions
+        # Now let's go through the actions within 'unconfigure' and
+        # use their discriminator to remove the real actions
         for unaction in self.actions:
-            # Special case subscriber actions.
+            # Special-case subscriber actions.
             if is_subscriber(*unaction):
-                factory = real_subscriber_factory(*unaction)
-                action = subscribers.get(factory)
+                factory, for_ = real_subscriber_factory(*unaction)
+                action = subscribers.get((factory, for_))
                 if action is None:
                     continue
                 self.remove_action(action)
-                del subscribers[factory]
+                del subscribers[(factory, for_)]
 
             # Generic from here
             discriminator = unaction[0]

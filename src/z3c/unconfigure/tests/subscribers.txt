@@ -32,5 +32,34 @@ Since we've unconfigured the handlers, we expect that nothing will
 happen when we send the event:
 
   >>> from zope.event import notify
-  >>> from z3c.unconfigure.tests.fixtures.handlers import Event
+  >>> from z3c.unconfigure.tests.fixtures.handlers import Event, Event2
   >>> notify(Event())
+
+When unconfiguring handlers, the mechanism is careful enough to
+distinguish multiple registrations of the same event handler (e.g. for
+different event types). For instance, consider a handler that's
+registered for its default event type and then registered again for
+another event type:
+
+  >>> zcml("""
+  ... <configure xmlns="http://namespaces.zope.org/zope">
+  ...   <include package="zope.component" file="meta.zcml" />
+  ...
+  ...   <subscriber handler=".handlers.regular" />
+  ...   <subscriber handler=".handlers.regular" for=".handlers.Event2" />
+  ...
+  ...   <unconfigure>
+  ...     <subscriber handler=".handlers.regular" />
+  ...   </unconfigure>
+  ... </configure>
+  ... """)
+
+We've unconfigured it for the original event type, so nothing will
+happen here:
+
+  >>> notify(Event())
+
+But for the other event, we'll get the subscriber just fine:
+
+  >>> notify(Event2())
+  Regular subscriber Event2
