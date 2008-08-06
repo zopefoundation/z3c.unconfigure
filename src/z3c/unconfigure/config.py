@@ -19,7 +19,7 @@ import zope.component.zcml
 
 def is_subscriber(discriminator, callable=None, args=(), kw={},
                   includepath=(), info='', order=0):
-    """Determines whether an action has been emitted from the
+    """Determines whether the action has been emitted from the
     <subscriber /> directive.
     """
     return (discriminator is None and
@@ -28,12 +28,14 @@ def is_subscriber(discriminator, callable=None, args=(), kw={},
 
 def real_subscriber_factory(discriminator, callable=None, args=(), kw={},
                             includepath=(), info='', order=0):
-    """Returns the real subscriber factory (<subscriber /> sometimes
-    wraps them in some security-related adapter factory) and the
-    required set of of interfaces ('for' parameter).
+    """Returns the real subscriber factory[#] and type of even that
+    the subscriber is registered for ('for' parameter).
 
     This function assumes that the action in question is a subscriber
     action.  In other words, is_subscriber(*args) is True.
+
+    [#] Under certain circumstances, <subscriber /> wraps factories in
+    some security- or location-related adapter factory.
     """
     factory = args[1]
     for_ = args[2]
