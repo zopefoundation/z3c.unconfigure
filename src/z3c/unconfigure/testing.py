@@ -67,7 +67,7 @@ def zcml(source):
         context, "lolcat", ILolCat, lolcat, namespace="*")
 
     source = '''\
-<configure package="z3c.unconfigure.testfixtures">
+<configure package="z3c.unconfigure.tests.fixtures">
 %s
 </configure>''' % source
 
@@ -75,12 +75,12 @@ def zcml(source):
 
 def cat(filename):
     here = os.path.dirname(__file__)
-    filename = os.path.join(here, 'testfixtures', filename)
+    filename = os.path.join(here, 'tests', 'fixtures', filename)
     print open(filename).read()
 
 def DocFileSuite(filename):
     return doctest.DocFileSuite(filename,
-                                package='z3c.unconfigure',
+                                package='z3c.unconfigure.tests',
                                 globs={'zcml': zcml,
                                        'cat': cat},
                                 tearDown=tearDown,

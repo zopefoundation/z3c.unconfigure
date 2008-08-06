@@ -18,6 +18,7 @@ from z3c.unconfigure.testing import DocFileSuite
 
 def test_suite():
     suite = unittest.TestSuite()
-    suite.addTest(DocFileSuite('README.txt'))
-    suite.addTest(DocFileSuite('tests.txt'))
+    suite.addTest(DocFileSuite('../README.txt'))
+    suite.addTest(DocFileSuite('overrides.txt'))
+    suite.addTest(DocFileSuite('subscribers.txt'))
     return suite

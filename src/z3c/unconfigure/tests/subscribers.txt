@@ -1,0 +1,36 @@
+Unconfiguring event handlers
+----------------------------
+
+This package also supports unconfiguring event handlers.
+
+  >>> import zope.component.eventtesting
+  >>> zope.component.eventtesting.setUp()
+
+Consider a bunch of event handlers configured in various ways:
+
+  >>> zcml("""
+  ... <configure xmlns="http://namespaces.zope.org/zope">
+  ...   <include package="zope.component" file="meta.zcml" />
+  ...
+  ...   <subscriber handler=".handlers.regular" />
+  ...   <subscriber handler=".handlers.trusted" trusted="yes" />
+  ...   <subscriber handler=".handlers.located" locate="yes" />
+  ...   <subscriber handler=".handlers.locatedtrusted"
+  ...               trusted="yes" locate="yes" />
+  ...
+  ...   <unconfigure>
+  ...     <subscriber handler=".handlers.regular" />
+  ...     <subscriber handler=".handlers.trusted" trusted="yes" />
+  ...     <subscriber handler=".handlers.located" locate="yes" />
+  ...     <subscriber handler=".handlers.locatedtrusted"
+  ...                 trusted="yes" locate="yes" />
+  ...   </unconfigure>
+  ... </configure>
+  ... """)
+
+Since we've unconfigured the handlers, we expect that nothing will
+happen when we send the event:
+
+  >>> from zope.event import notify
+  >>> from z3c.unconfigure.tests.fixtures.handlers import Event
+  >>> notify(Event())
