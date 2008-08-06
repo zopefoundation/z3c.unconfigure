@@ -35,6 +35,9 @@ setup(
     zip_safe=False,
     install_requires=['setuptools',
                       'zope.configuration',
+                      'zope.component', # technically [zcml]
+                      'zope.security',
+                      'zope.event',
                       'zope.testing',
                       ],
     )
