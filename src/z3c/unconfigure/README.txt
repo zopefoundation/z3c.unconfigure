@@ -92,3 +92,8 @@ using ``includeOverrides``, either explicitly by you or for you by
   Important configuration here.
   Goodbye World!
   This is the last directive
+
+In this case, simply including the file with the ``<include />``
+directive would've sufficed as well.  What matters is that the
+"unconfiguration" happens *after* the original configuration, and
+override files are a good place to ensure this.
