@@ -50,10 +50,10 @@ Where to place "unconfiguration"
 --------------------------------
 
 What's a good place to add the ``unconfigure`` directives, you may
-ask.  Certainly, the example from above is a not very realistic
-because both the original directives and the filters are in one file.
-What typically happens is that you have some third party package that
-has much configuration of which you'd like to disable just one or two
+ask.  Certainly, the example from above is not very realistic because
+both the original directives and the filters are in one file.  What
+typically happens is that you have some third party package that has
+much configuration of which you'd like to disable just one or two
 directives.  Like this file, for instance:
 
   >>> cat('lolcat.zcml')
@@ -67,9 +67,11 @@ directives.  Like this file, for instance:
   </configure>
 
 What you can do now is write a separate ZCML file in *your* package.
-A good name for it would be ``overrides.zcml`` (which is the
-convention for overriding ZCML directives, a technique not far from
-what ``unconfigure`` does).  For example:
+A good name for it would be ``overrides.zcml`` (which is the naming
+convention for ZCML files containing overriding directives, a
+technique not unlike to what ``unconfigure`` does).  For example,
+let's say we wanted to undo some silly configuration in the above
+third party file:
 
   >>> cat('overrides.zcml')
   <unconfigure>
