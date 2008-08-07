@@ -20,8 +20,6 @@ from zope.schema import Text, TextLine
 from zope.testing import doctest
 from zope.configuration import config
 from zope.configuration import xmlconfig
-from zope.configuration import zopeconfigure
-from z3c.unconfigure.config import Unconfigure
 
 class IPrint(Interface):
     msg = Text(title=u'Message')
@@ -54,11 +52,6 @@ def tearDown(test):
 def zcml(source):
     context = config.ConfigurationMachine()
     xmlconfig.registerCommonDirectives(context)
-    config.defineGroupingDirective(context,
-                                   name='unconfigure',
-                                   namespace="*",
-                                   schema=zopeconfigure.IZopeConfigure,
-                                   handler=Unconfigure)
 
     # Test directives
     config.defineSimpleDirective(

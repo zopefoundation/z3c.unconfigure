@@ -23,6 +23,7 @@ And a file with one override and one "unconfiguration":
   >>> cat('overrides2.zcml')
   <configure>
     <lolcat who="I" canhas="hamburger" />
+    <include package="z3c.unconfigure" file="meta.zcml" />
     <unconfigure>
       <print msg="LOL!" />
     </unconfigure>

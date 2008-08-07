@@ -13,9 +13,19 @@
 ##############################################################################
 """The 'unconfigure' grouping directive
 """
+from zope.configuration import config
+from zope.configuration.interfaces import IConfigurationContext
 from zope.configuration.zopeconfigure import ZopeConfigure
 from zope.security import adapter
 import zope.component.zcml
+
+def groupingDirectiveAllNS(_context, name, schema, handler,
+                           usedIn=IConfigurationContext):
+    """Registers a grouping directive with all namespaces.
+    """
+    config.defineGroupingDirective(_context, name, schema, handler,
+                                   namespace="*", usedIn=usedIn)
+
 
 def is_subscriber(discriminator, callable=None, args=(), kw={},
                   includepath=(), info='', order=0):

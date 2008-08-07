@@ -26,6 +26,7 @@ out the ones we want to exclude:
   ...   <print msg="Goodbye World!" />
   ...   <print msg="LOL!" />
   ...
+  ...   <include package="z3c.unconfigure" file="meta.zcml" />
   ...   <unconfigure>
   ...     <lolcat who="I" canhas="cheezburger" />
   ...     <print msg="LOL!" />
@@ -40,6 +41,7 @@ in the first place, nothing will happen:
 
   >>> zcml("""
   ... <configure>
+  ...   <include package="z3c.unconfigure" file="meta.zcml" />
   ...   <unconfigure>
   ...     <lolcat who="I" canhas="cheezburger" />
   ...   </unconfigure>
@@ -74,10 +76,13 @@ let's say we wanted to undo some silly configuration in the above
 third party file:
 
   >>> cat('overrides.zcml')
-  <unconfigure>
-    <lolcat who="I" canhas="cheezburger" />
-    <print msg="LOL!" />
-  </unconfigure>
+  <configure>
+    <include package="z3c.unconfigure" file="meta.zcml" />
+    <unconfigure>
+      <lolcat who="I" canhas="cheezburger" />
+      <print msg="LOL!" />
+    </unconfigure>
+  </configure>
 
 What you would do now is include first that third party package's
 configuration and then load your overrides (which is typically done

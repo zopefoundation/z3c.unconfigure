@@ -18,6 +18,7 @@ Consider a bunch of event handlers configured in various ways:
   ...   <subscriber handler=".handlers.locatedtrusted"
   ...               trusted="yes" locate="yes" />
   ...
+  ...   <include package="z3c.unconfigure" file="meta.zcml" />
   ...   <unconfigure>
   ...     <subscriber handler=".handlers.regular" />
   ...     <subscriber handler=".handlers.trusted" trusted="yes" />
@@ -48,6 +49,7 @@ another event type:
   ...   <subscriber handler=".handlers.regular" />
   ...   <subscriber handler=".handlers.regular" for=".handlers.Event2" />
   ...
+  ...   <include package="z3c.unconfigure" file="meta.zcml" />
   ...   <unconfigure>
   ...     <subscriber handler=".handlers.regular" />
   ...   </unconfigure>

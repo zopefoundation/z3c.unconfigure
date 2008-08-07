@@ -6,6 +6,12 @@ Changes
 
 * ...
 
+1.0.1 (2008-08-07)
+------------------
+
+* Added a ``meta.zcml`` file so that the ``<unconfigure>`` directive
+  can actually be registered from ZCML.
+
 1.0 (2008-08-07)
 ----------------
 

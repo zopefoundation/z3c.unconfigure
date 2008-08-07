@@ -1,0 +1,17 @@
+<configure xmlns:meta="http://namespaces.zope.org/meta">
+  <!-- We want the <unconfigure> directive to be available in all
+       namespaces.  Unfortunately, zope.configuration provides no
+       built-in way to register a directive this way, so we have to
+       make one ourselves. -->
+  <meta:directive
+      namespace="http://namespaces.zope.org/meta"
+      name="groupingDirectiveAllNS"
+      schema="zope.configuration.config.IFullInfo"
+      handler=".config.groupingDirectiveAllNS"
+      />
+  <meta:groupingDirectiveAllNS
+      name="unconfigure"
+      schema="zope.configuration.zopeconfigure.IZopeConfigure"
+      handler=".config.Unconfigure"
+      />
+</configure>
