@@ -104,3 +104,22 @@ In this case, simply including the file with the ``<include />``
 directive would've sufficed as well.  What matters is that the
 "unconfiguration" happens *after* the original configuration, and
 override files are a good place to ensure this.
+
+It can also be conveniend to unconfigure an entire zcml file. This can
+be done by using an include statement inside an unconfigure block:
+
+  >>> zcml("""
+  ... <configure>
+  ...   <print msg="The new hello" />
+  ...   <include file="lolcat.zcml" />
+  ...   <include package="z3c.unconfigure" file="meta.zcml" />
+  ...   <unconfigure>
+  ...     <include file="lolcat.zcml" />
+  ...   </unconfigure>
+  ...   <print msg="The final goodbye" />
+  ... </configure>
+  ... """)
+  The new hello
+  The final goodbye
+
+
