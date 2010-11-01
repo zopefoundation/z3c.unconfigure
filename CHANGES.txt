@@ -1,3 +1,10 @@
+Issues
+======
+
+* Unconfiguring an entire zcml file (include statement inside an unconfigure
+block) currently seems to be broken. (Test fails.)
+
+
 Changes
 =======
 
