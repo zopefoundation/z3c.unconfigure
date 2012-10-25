@@ -34,7 +34,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=['setuptools',
-                      'zope.configuration',
+                      'zope.configuration >= 3.8.0',
                       'zope.component', # technically [zcml]
                       'zope.security',
                       'zope.event',

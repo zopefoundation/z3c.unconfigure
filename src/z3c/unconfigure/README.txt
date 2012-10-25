@@ -118,7 +118,7 @@ be done by using an include statement inside an unconfigure block:
   ...   </unconfigure>
   ...   <print msg="The final goodbye" />
   ... </configure>
-  ... """)
+  ... """)  # XXX this is currently broken, so the test fails
   The new hello
   The final goodbye
 

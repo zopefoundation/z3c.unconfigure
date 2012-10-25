@@ -11,7 +11,10 @@ Changes
 1.1 (unreleased)
 ----------------
 
-* ...
+* Added support for zope.configuration 3.8.0, which changed the internal
+  data structures from tuples to dicts.
+
+* Dropped support for zope.configuration 3.7.x and older.
 
 1.0.1 (2008-08-07)
 ------------------
