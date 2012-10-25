@@ -66,6 +66,12 @@ class Unconfigure(ZopeConfigure):
         # all actions within 'unconfigure' will be added to this list
         # here, not the global actions list.
         self.actions = []
+        # The same logic applies to _seen_files.  It's normally used to
+        # avoid configuration conflicts by ignoring duplicated <include/>
+        # directives, but in this case we don't want to ignore an <include/>
+        # placed inside an <unconfigure> group that tries to undo a previous
+        # <include/>.
+        self._seen_files = set()
 
     def after(self):
         # Get a discriminator -> action representation of all the

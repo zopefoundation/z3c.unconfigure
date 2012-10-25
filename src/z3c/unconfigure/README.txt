@@ -106,7 +106,22 @@ directive would've sufficed as well.  What matters is that the
 override files are a good place to ensure this.
 
 It can also be conveniend to unconfigure an entire zcml file. This can
-be done by using an include statement inside an unconfigure block:
+be done without using z3c.unconfigure, if you use the ``<exclude />``
+directive before you include that file:
+
+  >>> zcml("""
+  ... <configure>
+  ...   <exclude file="lolcat.zcml" />
+  ...   <print msg="The new hello" />
+  ...   <include file="lolcat.zcml" />
+  ...   <include package="z3c.unconfigure" file="meta.zcml" />
+  ...   <print msg="The final goodbye" />
+  ... </configure>
+  ... """)
+  The new hello
+  The final goodbye
+
+Or you can try to use an include statement inside an unconfigure block:
 
   >>> zcml("""
   ... <configure>
@@ -118,7 +133,7 @@ be done by using an include statement inside an unconfigure block:
   ...   </unconfigure>
   ...   <print msg="The final goodbye" />
   ... </configure>
-  ... """)  # XXX this is currently broken, so the test fails
+  ... """)
   The new hello
   The final goodbye
 
