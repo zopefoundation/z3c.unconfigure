@@ -1,7 +1,7 @@
 Changes
 =======
 
-1.1 (unreleased)
+1.1 (2012-10-26)
 ----------------
 
 * Added support for zope.configuration 3.8.0, which changed the internal
