@@ -13,11 +13,12 @@
 ##############################################################################
 """The 'unconfigure' grouping directive
 """
+import zope.component.zcml
 from zope.configuration import config
 from zope.configuration.interfaces import IConfigurationContext
 from zope.configuration.zopeconfigure import ZopeConfigure
 from zope.security import adapter
-import zope.component.zcml
+
 
 def groupingDirectiveAllNS(_context, name, schema, handler,
                            usedIn=IConfigurationContext):
@@ -35,6 +36,7 @@ def is_subscriber(discriminator, callable=None, args=(), kw={},
     return (discriminator is None and
             callable is zope.component.zcml.handler and
             args[0] == 'registerHandler')
+
 
 def real_subscriber_factory(discriminator, callable=None, args=(), kw={},
                             includepath=(), info='', order=0, **extra):
@@ -55,10 +57,11 @@ def real_subscriber_factory(discriminator, callable=None, args=(), kw={},
         factory = factory.factory
     return factory, for_
 
+
 class Unconfigure(ZopeConfigure):
 
     def __init__(self, context, **kw):
-        super(Unconfigure, self).__init__(context, **kw)
+        super().__init__(context, **kw)
 
         # Make a new actions list here.  This will shadow
         # context.actions which would otherwise be "inherited" by our
@@ -76,17 +79,17 @@ class Unconfigure(ZopeConfigure):
     def after(self):
         # Get a discriminator -> action representation of all the
         # actions that have been churned out so far.
-        unique = dict((action['discriminator'], action)
-                      for action in self.context.actions
-                      if action['discriminator'] is not None)
+        unique = {action['discriminator']: action
+                  for action in self.context.actions
+                  if action['discriminator'] is not None}
 
         # Special-case subscriber actions: Find all subscriber actions
         # and store them as (factory, for) -> action.  They're a
         # special case because their discriminators are None, so we
         # can't pull the same trick as with other directives.
-        subscribers = dict((real_subscriber_factory(**action), action)
-                           for action in self.context.actions
-                           if is_subscriber(**action))
+        subscribers = {real_subscriber_factory(**action): action
+                       for action in self.context.actions
+                       if is_subscriber(**action)}
 
         # Now let's go through the actions within 'unconfigure' and
         # use their discriminator to remove the real actions
