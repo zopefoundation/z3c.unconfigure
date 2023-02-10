@@ -1,11 +1,11 @@
 from zope.component import adapter
 
 
-class Event(object):
+class Event:
     pass
 
 
-class Event2(object):
+class Event2:
     pass
 
 

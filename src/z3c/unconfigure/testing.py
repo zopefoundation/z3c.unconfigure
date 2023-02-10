@@ -25,7 +25,7 @@ from zope.schema import TextLine
 
 
 class IPrint(Interface):
-    msg = Text(title=u'Message')
+    msg = Text(title='Message')
 
 
 def print_(_context, msg):
@@ -41,8 +41,8 @@ def do_print(msg):
 
 
 class ILolCat(Interface):
-    who = TextLine(title=u'Who')
-    canhas = TextLine(title=u'Can has?')
+    who = TextLine(title='Who')
+    canhas = TextLine(title='Can has?')
 
 
 def lolcat(_context, who, canhas):
