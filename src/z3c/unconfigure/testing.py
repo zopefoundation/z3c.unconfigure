@@ -13,41 +13,49 @@
 ##############################################################################
 """Test fixtures
 """
+import doctest
 import os
+
 import zope.testing.cleanup
-from zope.interface import Interface
-from zope.schema import Text, TextLine
-from zope.testing import doctest
 from zope.configuration import config
 from zope.configuration import xmlconfig
+from zope.interface import Interface
+from zope.schema import Text
+from zope.schema import TextLine
+
 
 class IPrint(Interface):
     msg = Text(title=u'Message')
+
 
 def print_(_context, msg):
     _context.action(
         discriminator=('print', msg),
         callable=do_print,
         args=(msg,),
-        )
+    )
+
 
 def do_print(msg):
-    print msg
+    print(msg)
 
 
 class ILolCat(Interface):
     who = TextLine(title=u'Who')
     canhas = TextLine(title=u'Can has?')
 
+
 def lolcat(_context, who, canhas):
     _context.action(
         discriminator=('lolcat', who,),
         callable=do_print,
         args=(who + ' can has ' + canhas + '?',),
-        )
+    )
+
 
 def tearDown(test):
     zope.testing.cleanup.cleanUp()
+
 
 def zcml(source):
     context = config.ConfigurationMachine()
@@ -66,10 +74,13 @@ def zcml(source):
 
     xmlconfig.string(source, context)
 
+
 def cat(filename):
     here = os.path.dirname(__file__)
     filename = os.path.join(here, 'tests', 'fixtures', filename)
-    print open(filename).read()
+    with open(filename) as f:
+        print(f.read())
+
 
 def DocFileSuite(filename):
     return doctest.DocFileSuite(filename,

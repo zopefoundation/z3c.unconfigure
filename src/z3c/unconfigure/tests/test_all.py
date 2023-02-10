@@ -14,7 +14,9 @@
 """Tests
 """
 import unittest
-from z3c.unconfigure.testing import DocFileSuite    
+
+from z3c.unconfigure.testing import DocFileSuite
+
 
 def test_suite():
     suite = unittest.TestSuite()

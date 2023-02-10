@@ -13,11 +13,12 @@
 ##############################################################################
 """The 'unconfigure' grouping directive
 """
+import zope.component.zcml
 from zope.configuration import config
 from zope.configuration.interfaces import IConfigurationContext
 from zope.configuration.zopeconfigure import ZopeConfigure
 from zope.security import adapter
-import zope.component.zcml
+
 
 def groupingDirectiveAllNS(_context, name, schema, handler,
                            usedIn=IConfigurationContext):
@@ -35,6 +36,7 @@ def is_subscriber(discriminator, callable=None, args=(), kw={},
     return (discriminator is None and
             callable is zope.component.zcml.handler and
             args[0] == 'registerHandler')
+
 
 def real_subscriber_factory(discriminator, callable=None, args=(), kw={},
                             includepath=(), info='', order=0, **extra):
@@ -54,6 +56,7 @@ def real_subscriber_factory(discriminator, callable=None, args=(), kw={},
                             adapter.TrustedAdapterFactory)):
         factory = factory.factory
     return factory, for_
+
 
 class Unconfigure(ZopeConfigure):
 
