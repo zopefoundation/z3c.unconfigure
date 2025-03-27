@@ -31,7 +31,6 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Zope Public License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
@@ -44,7 +43,7 @@ setup(
     namespace_packages=['z3c'],
     include_package_data=True,
     zip_safe=False,
-    python_requires='>=3.8',
+    python_requires='>=3.9',
     install_requires=['setuptools',
                       'zope.configuration >= 3.8.0',
                       'zope.component',  # technically [zcml]
