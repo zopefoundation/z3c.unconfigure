@@ -11,8 +11,8 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Tests
-"""
+"""Tests"""
+
 import unittest
 
 from z3c.unconfigure.testing import DocFileSuite
@@ -20,7 +20,7 @@ from z3c.unconfigure.testing import DocFileSuite
 
 def test_suite():
     suite = unittest.TestSuite()
-    suite.addTest(DocFileSuite('../README.txt'))
-    suite.addTest(DocFileSuite('overrides.txt'))
-    suite.addTest(DocFileSuite('subscribers.txt'))
+    suite.addTest(DocFileSuite("../README.rst"))
+    suite.addTest(DocFileSuite("overrides.rst"))
+    suite.addTest(DocFileSuite("subscribers.rst"))
     return suite
