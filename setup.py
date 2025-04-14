@@ -17,7 +17,7 @@ long_description = (
 
 setup(
     name="z3c.unconfigure",
-    version="3.0.dev0",
+    version="3.0",
     description=(
         "Disable specific ZCML directives in other package's configuration"),
     long_description=long_description,
