@@ -1,6 +1,5 @@
 import os
 
-from setuptools import find_packages
 from setuptools import setup
 
 
@@ -18,7 +17,7 @@ long_description = (
 
 setup(
     name='z3c.unconfigure',
-    version='2.2.dev0',
+    version='3.0.dev0',
     description=("Disable specific ZCML directives in other package's "
                  "configuration"),
     long_description=long_description,
@@ -38,9 +37,6 @@ setup(
         'Programming Language :: Python :: 3.13',
     ],
 
-    packages=find_packages('src'),
-    package_dir={'': 'src'},
-    namespace_packages=['z3c'],
     include_package_data=True,
     zip_safe=False,
     python_requires='>=3.9',
