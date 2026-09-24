@@ -136,5 +136,3 @@ Or you can try to use an include statement inside an unconfigure block:
   ... """)
   The new hello
   The final goodbye
-
-
