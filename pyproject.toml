@@ -35,8 +35,10 @@ dependencies = [
     "zope.component",
     "zope.security",
     "zope.event",
-    "zope.testing",
 ]
+
+[project.optional-dependencies]
+test = ["zope.testing"]
 
 [project.urls]
 Source = "https://github.com/zopefoundation/z3c.unconfigure"

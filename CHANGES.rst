@@ -10,6 +10,9 @@ Changes
 
 * Drop support for Python 3.9.
 
+* Move ``zope.testing`` to a new ``test`` extra.  Importing
+  ``z3c.unconfigure.testing`` now requires ``z3c.unconfigure[test]``.
+
 
 3.0 (2025-04-14)
 ----------------
