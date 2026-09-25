@@ -9,7 +9,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "z3c.unconfigure"
-version = "4.0"
+version = "4.1.dev0"
 description = "Disable specific ZCML directives in other package's configuration"
 license = "ZPL-2.1"
 classifiers = [
