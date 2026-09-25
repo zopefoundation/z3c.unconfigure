@@ -1,7 +1,7 @@
 Changes
 =======
 
-4.0 (unreleased)
+4.0 (2026-09-25)
 ----------------
 
 Breaking changes
