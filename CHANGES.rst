@@ -1,17 +1,23 @@
 Changes
 =======
 
-3.1 (unreleased)
+4.0 (unreleased)
 ----------------
+
+Breaking changes
+++++++++++++++++
+
+* Move ``zope.testing`` to a new ``test`` extra.  Importing
+  ``z3c.unconfigure.testing`` now requires ``z3c.unconfigure[test]``.
+
+Other changes
++++++++++++++
 
 * Move package metadata from setup.py to pyproject.toml.
 
 * Add support for Python 3.14.
 
 * Drop support for Python 3.9.
-
-* Move ``zope.testing`` to a new ``test`` extra.  Importing
-  ``z3c.unconfigure.testing`` now requires ``z3c.unconfigure[test]``.
 
 
 3.0 (2025-04-14)
