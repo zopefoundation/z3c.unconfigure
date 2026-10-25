@@ -4,7 +4,7 @@ Changes
 4.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+* Drop support for Python 3.10.
 
 
 4.0 (2026-09-25)
